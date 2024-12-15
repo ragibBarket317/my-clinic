@@ -10,77 +10,59 @@ const app = express();
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: process.env.SOCKET_FRONTEND_URL, // Ensure this is set in your .env
+    origin: process.env.SOCKET_FRONTEND_URL,
     methods: ["GET", "POST"],
-    credentials: true, // Allow cookies and authentication headers
+    credentials: true,
   },
+  // Enables compatibility with polling
 });
-
-// Maps for Socket.IO
+// Socket.IO setup
 const userSocketMap = {};
-const whoSelectedWhom = {};
+const whoSlectedWhom = {};
 
-// Utility functions
 export const getReceiverSocketId = (receiverId) => {
   return userSocketMap[receiverId];
 };
-export const getWhoSelectedWhom = (who) => {
-  return whoSelectedWhom[who];
+export const getWhoSlectedWhom = (who) => {
+  return whoSlectedWhom[who];
 };
 
-// Socket.IO Connection Handling
 io.on("connection", (socket) => {
-  console.log("🔌 User connected:", socket.id);
+  console.log("a user connected", socket.id);
 
   const userId = socket.handshake.query.userId;
-  if (userId && userId !== "undefined") {
-    userSocketMap[userId] = socket.id;
-  }
+  if (userId != "undefined") userSocketMap[userId] = socket.id;
 
-  // Emit the list of online users to everyone
   io.emit("getOnlineUsers", Object.keys(userSocketMap));
 
-  // Handle custom event
   socket.on("whoSelectedWhom", (selectedId) => {
-    if (userId) {
-      whoSelectedWhom[userId] = selectedId;
-      console.log(`${userId} selected ${selectedId}`);
-    } else {
-      console.error("Invalid userId in whoSelectedWhom event");
-    }
+    whoSlectedWhom[userId] = selectedId;
   });
 
-  // Handle disconnect
   socket.on("disconnect", () => {
-    console.log("❌ User disconnected:", socket.id);
+    console.log("a user disconnected");
+
     delete userSocketMap[userId];
     io.emit("getOnlineUsers", Object.keys(userSocketMap));
   });
-
-  // Handle errors
-  socket.on("error", (err) => {
-    console.error("Socket error:", err);
-  });
 });
 
-// Middleware for CORS
 app.use(
   cors({
-    origin: process.env.CORS_ORIGIN, // Ensure this matches your frontend
-    credentials: true, // Enable cookies and headers
+    origin: process.env.CORS_ORIGIN,
+    credentials: true,
   })
 );
 
-// General Middleware
 app.use(express.json({ limit: "16kb" }));
 app.use(express.urlencoded({ extended: true, limit: "16kb" }));
 app.use(cookieParser());
 EventEmitter.defaultMaxListeners = 15;
 
-// Superadmin creation script
+// superadmin create script
 createSuperAdmin();
 
-// Importing routes
+// routes import
 import adminRouter from "./routes/admin.routes.js";
 import appointmentRouter from "./routes/appointment.routes.js";
 import documentRouter from "./routes/document.routes.js";
@@ -93,7 +75,7 @@ import patientRouter from "./routes/patient.routes.js";
 import settingRouter from "./routes/setting.routes.js";
 import { errorHandler } from "./utils/errorHandler.js";
 
-// Route declarations
+// routes declaration
 app.use("/api/v1/admins", adminRouter);
 app.use("/api/v1/invite", inviteAdmin);
 app.use("/api/v1/patient", patientRouter);
@@ -105,21 +87,11 @@ app.use("/api/v1/apts", appointmentRouter);
 app.use("/api/v1/documents", documentRouter);
 app.use("/api/v1/setting", settingRouter);
 
-// Error handler
 app.use(errorHandler);
-
-// Graceful shutdown
-process.on("SIGINT", () => {
-  console.log("🛑 Server shutting down...");
-  server.close(() => {
-    console.log("✅ Server closed.");
-    process.exit(0);
-  });
-});
 
 // Listen to the server on a port
 server.listen(process.env.PORT || 8000, () => {
-  console.log(`⚙️ Server is running on port: ${process.env.PORT || 8000}`);
+  console.log(`⚙️ Server is running at port : ${process.env.PORT}`);
 });
 
 export { app, io };
