@@ -1,0 +1,6 @@
+:root{
+    --toastify-color-success: #2f27ce;
+    --toastify-icon-color-success: var(--toastify-color-success);
+    --toastify-toast-background: #fbfbfe;
+    --toastify-font-family: "montserrat";
+}

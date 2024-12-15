@@ -1,0 +1,184 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --text: #050316;
+    --background: #fbfbfe;
+    --primary: #2f27ce;
+    --secondary: #dddbff;
+    --accent: #443dff;
+  }
+
+  .dark {
+    --text: #eae9fc;
+    --background: #171923;
+    --primary: #3a31d8;
+    --secondary: #181a24;
+    --accent: #0600c2;
+    --bgcolor: #1e293b;
+  }
+}
+
+.theme-default {
+  --color-theme: #254ff9;
+  --color-text: #ffffff;
+  --color-background: #e0e7ff;
+  --color-hover: #1e3a8a;
+}
+
+.theme-aubergine {
+  --color-theme: #4d1352;
+  --color-text: #ffffff;
+  --color-background: #f5e0f6;
+  --color-hover: #3b0c40;
+}
+
+.theme-clementine {
+  --color-theme: #c64907;
+  --color-text: #ffffff;
+  --color-background: #ffede0;
+  --color-hover: #993400;
+}
+
+.theme-banana {
+  --color-theme: #ffe57b;
+  --color-text: #1f2937;
+  --color-background: #fffbf0;
+  --color-hover: #d4b254;
+}
+
+.theme-jade {
+  --color-theme: #127a58;
+  --color-text: #ffffff;
+  --color-background: #e0f2ec;
+  --color-hover: #0a5641;
+}
+
+.theme-lagoon {
+  --color-theme: #0e5680;
+  --color-text: #ffffff;
+  --color-background: #e0f1f8;
+  --color-hover: #0a3d5b;
+}
+
+.theme-barbra {
+  --color-theme: #ffa1bf;
+  --color-text: #ffffff;
+  --color-background: #ffe4ee;
+  --color-hover: #e3789a;
+}
+
+.theme-gray {
+  --color-theme: #dddedf;
+  --color-text: #353434;
+  --color-background: #f7f7f7;
+  --color-hover: #b1b2b3;
+}
+
+.theme-indigo {
+  --color-theme: #122375;
+  --color-text: #ffffff;
+  --color-background: #e5e8f6;
+  --color-hover: #0f1a59;
+}
+@font-face {
+  font-family: "Zuume";
+  src: url("/fonts/Zuume\ Bold.ttf") format("truetype");
+  font-weight: bold;
+  font-style: normal;
+}
+
+.zumme {
+  font-family: "Zuume", sans-serif;
+}
+
+.montserrat {
+  font-family: "Montserrat", sans-serif;
+}
+
+.lato {
+  font-family: "Lato", sans-serif;
+}
+.custom-input {
+  width: 100px;
+  height: 30px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 5px;
+  transition: border-color 0.3s;
+}
+
+.custom-input:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+@layer components {
+  .form-control {
+    @apply mb-4 space-y-1;
+  }
+  .auth-label {
+    @apply leading-[100%] lg:text-[16px];
+  }
+  .auth-input {
+    @apply w-full rounded-md border border-[#CCCCCC]/[14%]   p-1 focus:outline-none lg:p-2;
+  }
+  .dark .rbc-day-bg.rbc-active {
+    @apply bg-gray-800; /* Dark mode background color */
+  }
+}
+
+.pagination {
+  list-style: none;
+  height: 31.5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2px;
+  cursor: pointer;
+  column-gap: 20px;
+}
+
+.page-item {
+  list-style: none;
+
+  height: 31.5px;
+  width: 31.5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2px;
+  border-radius: 50%;
+  border: 1px solid gray;
+}
+.page-item a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+}
+.page-item.active {
+  background-color: var(--color-theme);
+  border-radius: 50%;
+  color: var(--color-text);
+}
+.previous {
+  margin-right: 10px;
+}
+.next {
+  margin-left: 10px;
+}
+
+.toast-custom .Toastify__toast-icon {
+  color: var(--color-theme) !important;
+}
+
+.toast-custom .Toastify__progress-bar {
+  background-color: var(--color-theme) !important;
+}

@@ -1,0 +1,72 @@
+/* src/components/Calendar.css */
+
+.custom-event {
+  padding: 2px 5px;
+  margin: 2px 0;
+  border-radius: 3px;
+  color: white;
+  display: inline-block;
+  width: 100%;
+}
+
+.rbc-agenda-content table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.rbc-agenda-content th,
+.rbc-agenda-content td {
+  padding: 10px;
+  text-align: left;
+  vertical-align: top;
+  border: 1px solid #ddd;
+}
+
+.rbc-agenda-content th {
+  background-color: #f8f9fa;
+  font-weight: bold;
+}
+
+.rbc-agenda-content td {
+  background-color: #fff;
+}
+
+.rbc-agenda-content .rbc-event {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.rbc-event-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.dark .rbc-day-bg.rbc-active {
+  @apply bg-gray-800; /* Dark mode background color */
+}
+
+.rbc-event-wrapper {
+  padding: 2px 5px;
+  margin: 2px 5px;
+  border-radius: 3px;
+  cursor: pointer;
+  color: #fff;
+  display: inline-block;
+  width: 100%;
+}
+.rbc-time-slot .rbc-label {
+  visibility: hidden;
+}
+
+.rbc-time-view .rbc-allday-cell {
+  display: none; /* Hide the all-day cell */
+}
+
+.rbc-day-slot .rbc-time-slot {
+  border: 0px !important; /* Remove row borders in week view */
+}
+
+.rbc-time-view .rbc-time-content > .rbc-day-slot .rbc-time-slot {
+  border: 0px !important; /* Remove vertical borders in week view */
+}
