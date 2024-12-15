@@ -132,8 +132,6 @@ const SocketContexts = ({ children }) => {
 
   useEffect(() => {
     const newSocket = io(import.meta.env.VITE_SERVER_BASE_SOCKET_URL, {
-      transports: ['websocket', 'polling'], // Enable fallback
-      withCredentials: true,
       query: { userId: auth?.data?.data?.data?._id },
     })
 
